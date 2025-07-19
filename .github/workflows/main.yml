@@ -1,6 +1,6 @@
 name: FCE Ultra FX Build
 
-on: workflow_disparch
+on: workflow_dispatch
 
 jobs:
   build:
