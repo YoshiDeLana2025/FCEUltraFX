@@ -609,6 +609,8 @@ bool LoadPrefs()
 	bool prefFound = false;
 	char filepath[5][MAXPATHLEN];
 	int numDevices;
+	bool sdMounted = false;
+	bool usbMounted = false;
 
 #ifdef HW_RVL
 	numDevices = 4;
@@ -645,10 +647,41 @@ bool LoadPrefs()
 	if(prefFound)
 		FixInvalidSettings();
 
-	// attempt to create directories if they don't exist
-	if((GCSettings.LoadMethod == DEVICE_SD && ChangeInterface(DEVICE_SD, SILENT))
-		|| (GCSettings.LoadMethod == DEVICE_USB && ChangeInterface(DEVICE_USB, SILENT)))  
+	// rename fceuxtx to fceultrafx
+	if(GCSettings.LoadMethod == DEVICE_SD)
 	{
+		sdMounted = ChangeInterface(DEVICE_SD, NOTSILENT);
+		if(sdMounted && opendir("sd:/fceuxtx"))
+			rename("sd:/fceuxtx", "sd:/fceultrafx");
+	}
+	else if(GCSettings.LoadMethod == DEVICE_USB)
+	{
+		usbMounted = ChangeInterface(DEVICE_USB, NOTSILENT);
+		if(usbMounted && opendir("usb:/fceuxtx"))
+			rename("usb:/fceuxtx", "usb:/fceultrafx");	
+	}
+
+	// update folder locations
+	if(strcmp(GCSettings.LoadFolder, "fceuxtx/roms") == 0)
+		sprintf(GCSettings.LoadFolder, "fceultrafx/roms");
+	
+	if(strcmp(GCSettings.SaveFolder, "fceuxtx/saves") == 0)
+		sprintf(GCSettings.SaveFolder, "fceultrafx/saves");
+	
+	if(strcmp(GCSettings.CheatFolder, "fceuxtx/cheats") == 0)
+		sprintf(GCSettings.CheatFolder, "fceultrafx/cheats");
+		
+	if(strcmp(GCSettings.ScreenshotsFolder, "fceuxtx/screenshots") == 0)
+		sprintf(GCSettings.ScreenshotsFolder, "fceultrafx/screenshots");
+
+	if(strcmp(GCSettings.CoverFolder, "fceuxtx/covers") == 0)
+		sprintf(GCSettings.CoverFolder, "fceultrafx/covers");
+	
+	if(strcmp(GCSettings.ArtworkFolder, "fceuxtx/artwork") == 0)
+		sprintf(GCSettings.ArtworkFolder, "fceultrafx/artwork");
+	
+	// attempt to create directories if they don't exist
+	if((GCSettings.LoadMethod == DEVICE_SD && sdMounted) || (GCSettings.LoadMethod == DEVICE_USB && usbMounted) ) {
 		char dirPath[MAXPATHLEN];
 		sprintf(dirPath, "%s%s", pathPrefix[GCSettings.LoadMethod], GCSettings.ScreenshotsFolder);
 		CreateDirectory(dirPath);
