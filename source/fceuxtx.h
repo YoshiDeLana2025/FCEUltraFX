@@ -17,9 +17,9 @@
 
 #include "fceux/driver.h"
 
-#define APPNAME 			"FCEUX TX"
+#define APPNAME 			"FCE Ultra FX"
 #define APPVERSION 			"1.1.7"
-#define APPFOLDER 			"fceuxtx"
+#define APPFOLDER 			"fceultrafx"
 #define PREF_FILE_NAME		"settings.xml"
 
 #define MAXPATHLEN 1024
