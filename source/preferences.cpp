@@ -651,33 +651,33 @@ bool LoadPrefs()
 	if(GCSettings.LoadMethod == DEVICE_SD)
 	{
 		sdMounted = ChangeInterface(DEVICE_SD, NOTSILENT);
-		if(sdMounted && opendir("sd:/fceuxtx"))
-			rename("sd:/fceuxtx", "sd:/fceultrafx");
+		if(sdMounted && opendir("sd:/fceux"))
+			rename("sd:/fceux", "sd:/fceultrafx");
 	}
 	else if(GCSettings.LoadMethod == DEVICE_USB)
 	{
 		usbMounted = ChangeInterface(DEVICE_USB, NOTSILENT);
-		if(usbMounted && opendir("usb:/fceuxtx"))
-			rename("usb:/fceuxtx", "usb:/fceultrafx");	
+		if(usbMounted && opendir("usb:/fceux"))
+			rename("usb:/fceux", "usb:/fceultrafx");	
 	}
 
 	// update folder locations
-	if(strcmp(GCSettings.LoadFolder, "fceuxtx/roms") == 0)
+	if(strcmp(GCSettings.LoadFolder, "fceux/roms") == 0)
 		sprintf(GCSettings.LoadFolder, "fceultrafx/roms");
 	
-	if(strcmp(GCSettings.SaveFolder, "fceuxtx/saves") == 0)
+	if(strcmp(GCSettings.SaveFolder, "fceux/saves") == 0)
 		sprintf(GCSettings.SaveFolder, "fceultrafx/saves");
 	
-	if(strcmp(GCSettings.CheatFolder, "fceuxtx/cheats") == 0)
+	if(strcmp(GCSettings.CheatFolder, "fceux/cheats") == 0)
 		sprintf(GCSettings.CheatFolder, "fceultrafx/cheats");
 		
-	if(strcmp(GCSettings.ScreenshotsFolder, "fceuxtx/screenshots") == 0)
+	if(strcmp(GCSettings.ScreenshotsFolder, "fceux/screenshots") == 0)
 		sprintf(GCSettings.ScreenshotsFolder, "fceultrafx/screenshots");
 
-	if(strcmp(GCSettings.CoverFolder, "fceuxtx/covers") == 0)
+	if(strcmp(GCSettings.CoverFolder, "fceux/covers") == 0)
 		sprintf(GCSettings.CoverFolder, "fceultrafx/covers");
 	
-	if(strcmp(GCSettings.ArtworkFolder, "fceuxtx/artwork") == 0)
+	if(strcmp(GCSettings.ArtworkFolder, "fceux/artwork") == 0)
 		sprintf(GCSettings.ArtworkFolder, "fceultrafx/artwork");
 	
 	// attempt to create directories if they don't exist
