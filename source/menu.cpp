@@ -72,6 +72,7 @@ static GuiImage * bgTopImg = NULL;
 static GuiImage * bgBottomImg = NULL;
 static GuiSound * bgMusic = NULL;
 static GuiSound * enterSound = NULL;
+static GuiSound * exitSound = NULL;
 static GuiWindow * mainWindow = NULL;
 static GuiText * settingText = NULL;
 static GuiText * settingText2 = NULL;
@@ -1756,6 +1757,7 @@ static int MenuGame()
 		{
 			menu = MENU_EXIT;
 
+			exitSound->Play();
 			bgTopImg->SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 15);
 			closeBtn.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 15);
 			titleTxt.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 15);
@@ -2095,6 +2097,7 @@ static int MenuGameSaves(int action)
 		{
 			menu = MENU_EXIT;
 
+			exitSound->Play();
 			bgTopImg->SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 15);
 			closeBtn.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 15);
 			titleTxt.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 15);
@@ -2345,6 +2348,7 @@ static int MenuGameSettings()
 		{
 			menu = MENU_EXIT;
 
+			exitSound->Play();
 			bgTopImg->SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 15);
 			closeBtn.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 15);
 			titleTxt.SetEffect(EFFECT_SLIDE_TOP | EFFECT_SLIDE_OUT, 15);
@@ -4775,6 +4779,8 @@ MainMenu (int menu)
 		bgMusic->SetLoop(true);
 		enterSound = new GuiSound(enter_ogg, enter_ogg_size, SOUND_OGG);
 		enterSound->SetVolume(GCSettings.SFXVolume);
+		exitSound = new GuiSound(exit_ogg, exit_ogg_size, SOUND_OGG);
+		exitSound->SetVolume(GCSettings.SFXVolume);
 	}
 
 	if(currentMenu == MENU_GAMESELECTION)
