@@ -2,8 +2,8 @@
 <app version="1">
   <name>FCE Ultra FX</name>
   <coder>YoshiDeLana2025</coder>
-  <version>1.1.7</version>
-  <release_date>20250719</release_date>
+  <version>1.1.8</version>
+  <release_date>20260622</release_date>
   <short_description>NES/Famicom Emulator</short_description>
   <long_description>FCE Ultra FX is a fork of FCEUXTX on Wii.</long_description>
   <ahb_access />
