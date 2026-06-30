@@ -1,4 +1,4 @@
-name: FCE Ultra FX Build
+name: FCE Ultra FX Build (Wii)
 
 on: workflow_dispatch
 
@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        image: ["Wii", "GameCube"]
+        image: ["Wii"]
     container: devkitpro/devkitppc:20230110
 
     steps:
@@ -41,22 +41,3 @@ jobs:
         name: FCEUltraFX
         path: |
          dist/FCEUltraFX/
-    
-    - name: Build GameCube
-      if: ${{ matrix.image == 'GameCube' }}
-      run: |
-        make -f Makefile.gc -j2
-        
-    - name: Copy GameCube artifact
-      if: ${{ matrix.image == 'GameCube' }}
-      run: | 
-        mkdir -p dist/FCEUltraFX-GameCube
-        cp executables/fceultrafx-gc.dol dist/FCEUltraFX-GameCube/
-    
-    - name: Upload GameCube artifact
-      uses: actions/upload-artifact@v7
-      if: ${{ matrix.image == 'GameCube' }}
-      with: 
-        name: FCEUltraFX-GameCube
-        path: |
-         dist/FCEUltraFX-GameCube/
